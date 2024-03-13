@@ -1,3 +1,25 @@
 ---
 name: "namespace1-network-policy"
 namespace: "namespace1"
+ingress:
+- from:
+  - namespaceSelector:
+      matchLabels:
+        tier: "backend"
+    podSelector:
+      matchLabels:
+        app: "backend"
+  ports:
+  - protocol: "TCP"
+    port: 80
+egress:
+- to:
+  - namespaceSelector:
+      matchLabels:
+        tier: "backend"
+    podSelector:
+      matchLabels:
+        app: "backend"
+  ports:
+  - protocol: "TCP"
+    port: 80
